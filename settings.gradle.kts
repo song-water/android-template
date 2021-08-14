@@ -15,15 +15,19 @@ include(":androidApp")
 composeSubProject("androidModules", "android_")
 
 fun composeSubProject(subProjectDirName: String, modulePrefix: String) {
-    println("composeSubProject $subProjectDirName -->> $$modulePrefix")
+    println("composeSubProject $subProjectDirName -- $$modulePrefix")
     File("./$subProjectDirName")
         .walk()
         .maxDepth(1)
+        .filter {
+            it.isDirectory
+        }
         .filterNot {
             it.name == subProjectDirName
         }
         .filter {
-            it.isDirectory
+            File("${it.path}${File.separator}build.gradle").isFile ||
+                    File("${it.path}${File.separator}build.gradle.kts").isFile
         }
         .forEach { dir ->
             include("$modulePrefix${dir.name}")
