@@ -40,8 +40,8 @@ dependencies {
 
     api("androidx.core:core-ktx:1.6.0")
     api("androidx.appcompat:appcompat:1.3.1")
-    api("androidx.activity:activity:1.3.0")
-    api("androidx.activity:activity-ktx:1.3.0")
+    api("androidx.activity:activity:1.3.1")
+    api("androidx.activity:activity-ktx:1.3.1")
     api("androidx.lifecycle:lifecycle-process:2.3.1")
 
     // api("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
@@ -57,6 +57,6 @@ dependencies {
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
-    testImplementation(project(":androidModules:unitTests"))
-    androidTestImplementation(project(":androidModules:androidTests"))
+    testImplementation(project(":android_unitTests"))
+    androidTestImplementation(project(":android_androidTests"))
 }

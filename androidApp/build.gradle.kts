@@ -40,10 +40,10 @@ tasks.withType<JavaCompile>() {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))
-    implementation(project(":androidModules:common"))
+    implementation(project(":android_common"))
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
-    testImplementation(project(":androidModules:unitTests"))
-    androidTestImplementation(project(":androidModules:androidTests"))
+    testImplementation(project(":android_unitTests"))
+    androidTestImplementation(project(":android_androidTests"))
 }
