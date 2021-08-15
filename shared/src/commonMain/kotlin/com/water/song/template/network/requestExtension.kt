@@ -21,6 +21,7 @@ internal suspend fun HttpClient.awaitTimeout(
                 await(client, requestConfig)
             }
         }.getOrElse {
+            println("HelloWorld awaitTimeout " + it.message)
             NetworkResult.Error(HttpStatusCode(666, it.message ?: ""))
         }
     }
@@ -35,6 +36,7 @@ private suspend inline fun await(
             val result = response.readText(Charsets.UTF_8)
             NetworkResult.Okay(result)
         } else {
+            println("HelloWorld await ")
             NetworkResult.Error(response.status)
         }
     }

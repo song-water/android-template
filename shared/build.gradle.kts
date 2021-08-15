@@ -51,9 +51,11 @@ kotlin {
         }
         val commonTest by getting {
             dependencies {
-                implementation("junit:junit:$junit_version")
+                implementation("io.ktor:ktor-client-mock:$ktor_version")
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+                // implementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
+                // implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlin_coroutines_version")
             }
         }
         val androidMain by getting {
@@ -72,7 +74,8 @@ kotlin {
         val androidTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
-                implementation("junit:junit:4.13.2")
+                implementation("junit:junit:$junit_version")
+                implementation("io.ktor:ktor-client-mock-jvm:$ktor_version")
                 // implementation("com.squareup.sqldelight:sqlite-driver:$sql_delight_version")
             }
         }

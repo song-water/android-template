@@ -20,16 +20,16 @@ abstract class NetworkService : RequestService, RequestCallback {
         return false
     }
 
-    override fun call(workScope: CoroutineScope?, coroutineContext: CoroutineContext?) {
-        delayCall(0, 0, workScope, coroutineContext)
+    override fun call(workScope: CoroutineScope?, coroutineContext: CoroutineContext?): Job {
+        return delayCall(0, 0, workScope, coroutineContext)
     }
 
     override fun call(
         timeoutMillis: Long,
         workScope: CoroutineScope?,
         coroutineContext: CoroutineContext?
-    ) {
-        delayCall(timeoutMillis, 0, workScope, coroutineContext)
+    ) : Job{
+        return delayCall(timeoutMillis, 0, workScope, coroutineContext)
     }
 
     override fun delayCall(
@@ -37,9 +37,9 @@ abstract class NetworkService : RequestService, RequestCallback {
         delayMillis: Long,
         workScope: CoroutineScope?,
         coroutineContext: CoroutineContext?
-    ) {
+    ): Job {
         val callScope = workScope ?: GlobalScope
-        getClient().let {
+        return getClient().let {
             val callContext = coroutineContext ?: it.coroutineContext
             callScope.launch(callContext) {
                 awaitAndDispatchResult(it, timeoutMillis, delayMillis)
@@ -51,8 +51,8 @@ abstract class NetworkService : RequestService, RequestCallback {
         delayMillis: Long,
         workScope: CoroutineScope?,
         coroutineContext: CoroutineContext?
-    ) {
-        delayCall(0, delayMillis, workScope, coroutineContext)
+    ) : Job{
+        return delayCall(0, delayMillis, workScope, coroutineContext)
     }
 
     private suspend fun awaitAndDispatchResult(
